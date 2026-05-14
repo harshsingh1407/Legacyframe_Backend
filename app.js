@@ -23,6 +23,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
 app.use('/api/portfolio', require('./routes/portfolioRoutes'));
+app.use('/api/videos', require('./routes/videoRoutes'));
 app.use('/api/contact', require('./routes/contactRoutes'));
 app.use('/api/booking', require('./routes/bookingRoutes'));
 
@@ -43,8 +44,8 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 5000;
 
-// app.listen(PORT, () => {
-//     console.log(`Server running on port ${PORT}`);
-// });
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
 
 module.exports = app;
