@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-const portfolioSchema = new mongoose.Schema({
+const videoSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
     },
-    imageUrl: {
+    videoUrl: {
         type: String,
         required: true
     },
@@ -17,14 +17,10 @@ const portfolioSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    description: {
-        type: String,
-        required: false
-    },
     createdAt: {
         type: Date,
         default: Date.now
     }
 });
 
-module.exports = mongoose.model('Portfolio', portfolioSchema);
+module.exports = mongoose.model('Video', videoSchema);

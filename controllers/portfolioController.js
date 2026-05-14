@@ -18,11 +18,7 @@ const getPortfolios = async (req, res) => {
 // @access  Public (Should be private in production)
 const addPortfolio = async (req, res) => {
     try {
-        console.log('Adding portfolio item...');
-        console.log('Body:', req.body);
-        console.log('File:', req.file);
-
-        const { title, category, description, spanClass } = req.body;
+        const { title, category, description } = req.body;
         
         let imageUrl = req.body.imageUrl;
         let cloudinaryId = '';
@@ -41,14 +37,11 @@ const addPortfolio = async (req, res) => {
             imageUrl,
             cloudinaryId,
             category,
-            description,
-            spanClass
+            description
         });
         const savedPortfolio = await newPortfolio.save();
-        console.log('Portfolio saved:', savedPortfolio);
         res.status(201).json(savedPortfolio);
     } catch (error) {
-        console.error('Error in addPortfolio:', error);
         res.status(400).json({ message: error.message || 'Error saving portfolio' });
     }
 };
@@ -63,7 +56,7 @@ const updatePortfolio = async (req, res) => {
             return res.status(404).json({ message: 'Portfolio item not found' });
         }
 
-        const { title, category, description, spanClass } = req.body;
+        const { title, category, description } = req.body;
         
         let imageUrl = portfolio.imageUrl;
         let cloudinaryId = portfolio.cloudinaryId;
@@ -81,14 +74,12 @@ const updatePortfolio = async (req, res) => {
         portfolio.title = title || portfolio.title;
         portfolio.category = category || portfolio.category;
         portfolio.description = description || portfolio.description;
-        portfolio.spanClass = spanClass || portfolio.spanClass;
         portfolio.imageUrl = imageUrl;
         portfolio.cloudinaryId = cloudinaryId;
 
         const updatedPortfolio = await portfolio.save();
         res.status(200).json(updatedPortfolio);
     } catch (error) {
-        console.error('Error in updatePortfolio:', error);
         res.status(400).json({ message: error.message || 'Error updating portfolio' });
     }
 };
